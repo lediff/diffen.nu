@@ -11,7 +11,7 @@ node {
         /* This builds the actual image; synonymous to
          * docker build on the command line */
 
-        app = docker.build("diffen/weather")
+        app = docker.build("diffen/diffen.nu")
     }
 
     stage('Test image') {
