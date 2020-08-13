@@ -1,6 +1,6 @@
 FROM python:3.7.2-stretch
 
-MAINTAINER Diffen
+LABEL key="Diffen"
 
 COPY ./app/requirements.txt /app/requirements.txt
 
