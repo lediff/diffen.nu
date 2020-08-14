@@ -2,7 +2,7 @@ FROM python:3.7.2-stretch
 
 LABEL key="Diffen"
 
-COPY ./app/requirements.txt /app/requirements.txt
+COPY . requirements.txt /app/requirements.txt
 
 WORKDIR /app
 
