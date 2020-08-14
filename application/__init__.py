@@ -18,6 +18,6 @@ Migrate(app,db)
 login_manager.init_app(app)
 login_manager.login_view = 'login '
 
-from myproject.puppies.views import puppies_blueprint
+#from myproject.puppies.views import puppies_blueprint
 
-app.register_blueprint(puppies_blueprint,url_prefix='/puppies')
+#app.register_blueprint(puppies_blueprint,url_prefix='/puppies')
