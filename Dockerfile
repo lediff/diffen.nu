@@ -2,14 +2,14 @@ FROM python:3.7.2-stretch
 
 LABEL key="Diffen"
 
-COPY . requirements.txt /app/requirements.txt
+COPY . /application/requirements.txt /application/requirements.txt
 
-WORKDIR /app
+WORKDIR /application
 
 RUN apt update
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
-COPY . /app
+COPY . /application
 
 CMD python basic.py run -h 0.0.0.0
