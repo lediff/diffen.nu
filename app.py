@@ -1,7 +1,7 @@
+from application import app,db
 from flask import render_template,redirect,request,url_for,flash,abort
 #import logging as logger
 #logger.basicConfig(level="DEBUG")
-app = Flask(__name__)
 
 @app.route('/')
 def index():
