@@ -13,4 +13,4 @@ RUN pip install -r requirements.txt
 
 
 
-CMD python basic.py run -h 0.0.0.0
+CMD python app.py run -h 0.0.0.0
