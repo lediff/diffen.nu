@@ -1,11 +1,11 @@
-from flask import Flask, render_template
+from flask import render_template,redirect,request,url_for,flash,abort
 #import logging as logger
 #logger.basicConfig(level="DEBUG")
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-	return render_template('basic.html')
+	return render_template('index.html')
 
 @app.route('/discord')
 def discord():
@@ -18,3 +18,4 @@ def weight_tracker():
 if __name__ == '__main__':
 	app.run(debug=True, host='0.0.0.0')
 
+ 
