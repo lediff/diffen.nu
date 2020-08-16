@@ -1,12 +1,10 @@
 from application import app, db
 from flask import render_template, redirect, request, url_for, flash, abort
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 from application.models import User
 from application.forms import LoginForm, RegistrationForm
 
-
 # logger.basicConfig(level="DEBUG")
-
 
 @app.route('/')
 def index():
@@ -21,6 +19,10 @@ def discord():
 @app.route('/weight_tracker')
 def weight_tracker():
     return render_template('weight_tracker.html')
+
+@app.route('/weight_tracker_register')
+def weight_tracker_register():
+    return render_template('weight_tracker_register.html')
 
 
 @app.route('/logout')
@@ -42,13 +44,15 @@ def login():
             login_user(user)
 
             flash('Logged in successfully!')
-
+            
             next = request.args.get('next')
 
-            if next == None or not next[0] == '/':
-                next = url_for('profile')
+            if next ==None or not next[0]=='/':
+                next = url_for('index')
 
-            return redirect(next)
+            return redirect(next)            
+
+        return redirect(url_for('index'))
    
 
     return render_template('login.html', form=form)
@@ -72,17 +76,19 @@ def register():
             flash("You have successfully registered!")
 
             return redirect(url_for('login'))
-
-        
-
-
+     
     return render_template('register.html', form=form)
 
 
-@app.route('/profile')
+@app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-    return render_template('profile.html')
+    user = User.query.filter_by(id=current_user.id).first_or_404()
+
+    sune = 1+1
+    print(sune)
+    
+    return render_template('profile.html',user=user)
 
 
 if __name__ == '__main__':

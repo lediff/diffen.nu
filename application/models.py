@@ -36,6 +36,9 @@ class User(db.Model,UserMixin):
         for weight in self.weights:
             print(weight.kilo)
 
+    def __repr__(self):
+        return f"Username {self.username}"
+
 
 class Weight(db.Model):
     __tablename__ = 'weight'

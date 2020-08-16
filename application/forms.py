@@ -23,3 +23,14 @@ class LoginForm(FlaskForm):
              validators.Email()])
     password = PasswordField('Lösenord: ',validators=[InputRequired("Du måste ange ett lösenord")])
     submit = SubmitField('Logga in')
+
+
+class UpdateUserForm(FlaskForm):
+    email = StringField('E-post:',validators=[InputRequired("Du måste ange e-post adress"),Email()])
+    name = StringField('Namn:',validators=[InputRequired()])
+    submit = SubmitField('Uppdatera')
+
+    def check_email(self, field):
+    # Check if not None for that user email!
+        if User.query.filter_by(email=field.data).first():
+            raise ValidationError('Your email has been registered already!')
