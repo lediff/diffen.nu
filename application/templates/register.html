@@ -1,7 +1,11 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
 <div class="jumbotron">
     <h1>Time to register!</h1> 
+    {{ wtf.quick_form(form) }}
+    
+    <!--
     <form method="POST">
         {{form.hidden_tag()}}
         {{form.name.label}}{{form.name}} <br>
@@ -9,7 +13,7 @@
         {{form.password.label}}{{form.password}}<br>
         {{form.pass_confirm.label}}{{form.pass_confirm}}<br>
         {{form.submit()}}
-    </form> 
+    </form>  -->
 </div>
     
 {% endblock %}

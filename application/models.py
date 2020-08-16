@@ -15,7 +15,7 @@ class User(db.Model,UserMixin):
 
     id = db.Column(db.Integer,primary_key=True)
     name = db.Column(db.String(64))
-    email = db.Column(db.String(64))
+    email = db.Column(db.String(64),unique=True,index=True)
     password_hash = db.Column(db.String(128))
     # One to many
     # name to many weights

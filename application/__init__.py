@@ -3,9 +3,12 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
+from flask_bootstrap import Bootstrap
 
 login_manager = LoginManager()
 app = Flask(__name__)
+
+Bootstrap(app)
 
 app.config['SECRET_KEY'] = 'mysecretkey'
 basedir = os.path.abspath(os.path.dirname(__file__))
