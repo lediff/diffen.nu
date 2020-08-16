@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField,SubmitField,PasswordField,validators
+from wtforms import StringField,SubmitField,PasswordField,validators, IntegerField,DateField,FloatField,DecimalField
 from wtforms.validators import Email,EqualTo,InputRequired,ValidationError,DataRequired
 from application.models import User
 
@@ -34,3 +34,8 @@ class UpdateUserForm(FlaskForm):
     # Check if not None for that user email!
         if User.query.filter_by(email=field.data).first():
             raise ValidationError('Your email has been registered already!')
+
+class WeightTrackerForm(FlaskForm):
+    kilo = DecimalField('Vikt: ',validators=[validators.DataRequired()])
+    date = DateField('Datum för vägning: ',validators=[validators.DataRequired()])
+    submit = SubmitField('Registrera vikt')

@@ -1,7 +1,16 @@
 {% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
 {% block content %}
 <div class="jumbotron">
-    <h1>Viktkollare</h1>
+    <h1>Viktkollare!</h1>
+        Lista över inrapporterad vikt och datum.
+    <ul class="list-group"> 
+    {% for weight in weights %}
+        <li class="list-group-item">Datum: {{ weight.date }} - {{ weight.kilo}} kg</li>
+        
+    {% endfor %}
+    </ul>
 </div>
     
-{% endblock %}
+{% endblock %}    
+<!--  -->

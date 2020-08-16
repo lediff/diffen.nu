@@ -1,8 +1,9 @@
 from application import app, db
 from flask import render_template, redirect, request, url_for, flash, abort
 from flask_login import login_user, login_required, logout_user, current_user
-from application.models import User
-from application.forms import LoginForm, RegistrationForm
+from application.models import User,Weight
+from application.forms import LoginForm, RegistrationForm,WeightTrackerForm
+from operator import attrgetter
 
 # logger.basicConfig(level="DEBUG")
 
@@ -16,13 +17,26 @@ def discord():
     return render_template('discord.html')
 
 
-@app.route('/weight_tracker')
+@app.route('/weight_tracker', methods=['GET', 'POST'])
 def weight_tracker():
-    return render_template('weight_tracker.html')
+    user = User.query.filter_by(id=current_user.id).first_or_404()
+    weights = Weight.query.filter_by(fk_user_id=current_user.id).order_by(Weight.date.asc())
 
-@app.route('/weight_tracker_register')
+    return render_template('weight_tracker.html',user=user,weights=weights)
+
+@app.route('/weight_tracker_register' , methods=['GET', 'POST'])
 def weight_tracker_register():
-    return render_template('weight_tracker_register.html')
+    form = WeightTrackerForm()
+
+    if form.validate_on_submit():
+        weight = Weight(kilo=form.kilo.data,date=form.date.data,fk_user_id=current_user.id)
+     
+        db.session.add(weight)
+        db.session.commit()
+        
+        return redirect(url_for('weight_tracker'))
+
+    return render_template('weight_tracker_register.html',form=form)
 
 
 @app.route('/logout')

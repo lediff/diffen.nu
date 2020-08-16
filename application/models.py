@@ -44,25 +44,11 @@ class Weight(db.Model):
     __tablename__ = 'weight'
 
     id = db.Column(db.Integer,primary_key=True)
-    kilo = db.Column(db.Integer)
-    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
-
-    def __init__(self,kilo,user_id):
-        self.kilo = kilo
-        self.user_id = user_id
-
-class Date(db.Model):
-    __tablename__ = 'dates'
-
-    id = db.Column(db.Integer,primary_key=True)
+    kilo = db.Column(db.Float)
     date = db.Column(db.Date)
-    user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
-    weight_id = db.Column(db.Integer,db.ForeignKey('weight.id'))
+    fk_user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
 
-    def __init__(self,date,user_id,weight_id):
+    def __init__(self,kilo,date,fk_user_id):
+        self.kilo = kilo
         self.date = date
-        self.user_id = user_id
-        self.weight_id = weight_id
-
-
-    
+        self.fk_user_id = fk_user_id
