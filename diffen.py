@@ -19,10 +19,9 @@ def discord():
 
 @app.route('/weight_tracker', methods=['GET', 'POST'])
 def weight_tracker():
-    user = User.query.filter_by(id=current_user.id).first_or_404()
     weights = Weight.query.filter_by(fk_user_id=current_user.id).order_by(Weight.date.asc())
 
-    return render_template('weight_tracker.html',user=user,weights=weights)
+    return render_template('weight_tracker.html',weights=weights)
 
 @app.route('/weight_tracker_register' , methods=['GET', 'POST'])
 def weight_tracker_register():
@@ -97,21 +96,24 @@ def register():
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
-
-    form = UpdateUserForm()
-
-    if form.validate_on_submit():
-        email = form.email.data
-        name = form.name.data
-        length = form.length.data
-        db.session.commit()
-        flash("cool shit")
-
-        return redirect(url_for('login'))
-
+    
     user = User.query.filter_by(id=current_user.id).first_or_404()
+    bmi_length = (user.length / 100) * (user.length / 100)
+ 
+    if request.method == 'POST':
+        weights = Weight.query.filter_by(fk_user_id=current_user.id).all()
 
-    return render_template('profile.html',user=user,form=form)
+        for gunnar in weights:
+            
+            bmi = gunnar.kilo / bmi_length
+            bmi = round(bmi, 1)
+
+            gunnar.bmi = bmi
+            db.session.commit()
+            print(f"bmi {bmi}")
+
+
+    return render_template('profile.html',user=user)
 
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
@@ -139,3 +141,4 @@ def edit_profile():
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
+

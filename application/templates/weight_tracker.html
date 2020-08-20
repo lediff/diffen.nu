@@ -11,12 +11,13 @@
                 <tr>                  
                   <th>Datum</th>
                   <th>Vikt</th>
+                  <th>BMI</th>
                 </tr>
             </thead>
             <tbody>
             {% for weight in weights %}
                 <tr>
-                    <td>{{ weight.date }}</td><td>{{ weight.kilo}}</td>
+                    <td>{{ weight.date }}</td><td>{{ weight.kilo}}</td><td>{{ weight.bmi}}</td>
                 </tr>            
             {% endfor %}
         </tbody>

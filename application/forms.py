@@ -40,3 +40,5 @@ class WeightTrackerForm(FlaskForm):
     kilo = DecimalField('Vikt: ',validators=[validators.DataRequired()])
     date = DateField('Datum för vägning: ',validators=[validators.DataRequired()])
     submit = SubmitField('Registrera vikt')
+
+    
