@@ -3,10 +3,12 @@
 {% block content %}
 <div class="jumbotron">
     <h1>Inloggad!</h1>
-    <p>här kan du grejja med din profil</p>
-    Id: {{ user.id }} <br>
-    Namn: {{ user.name }}<br>
-    E-post: {{ user.email }}
+    <p>Vill du uppdatera din profil klicka här: <a href="edit_profile">ändra</a> </p>
+        Id: {{ user.id }} <br>
+        Namn: {{ user.name }}<br>
+        E-post: {{ user.email }} <br>
+        Längd: {{ user.length }} <br>
+
 </div>
     
 {% endblock %}    

@@ -28,6 +28,7 @@ class LoginForm(FlaskForm):
 class UpdateUserForm(FlaskForm):
     email = StringField('E-post:',validators=[InputRequired("Du måste ange e-post adress"),Email()])
     name = StringField('Namn:',validators=[InputRequired()])
+    length = IntegerField('Längd: ',validators=[DataRequired()])
     submit = SubmitField('Uppdatera')
 
     def check_email(self, field):

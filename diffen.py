@@ -2,7 +2,7 @@ from application import app, db
 from flask import render_template, redirect, request, url_for, flash, abort
 from flask_login import login_user, login_required, logout_user, current_user
 from application.models import User,Weight
-from application.forms import LoginForm, RegistrationForm,WeightTrackerForm
+from application.forms import LoginForm, RegistrationForm,WeightTrackerForm,UpdateUserForm
 from operator import attrgetter
 
 # logger.basicConfig(level="DEBUG")
@@ -97,13 +97,45 @@ def register():
 @app.route('/profile', methods=['GET', 'POST'])
 @login_required
 def profile():
+
+    form = UpdateUserForm()
+
+    if form.validate_on_submit():
+        email = form.email.data
+        name = form.name.data
+        length = form.length.data
+        db.session.commit()
+        flash("cool shit")
+
+        return redirect(url_for('login'))
+
     user = User.query.filter_by(id=current_user.id).first_or_404()
 
-    sune = 1+1
-    print(sune)
-    
-    return render_template('profile.html',user=user)
+    return render_template('profile.html',user=user,form=form)
 
+@app.route('/edit_profile', methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+
+    form = UpdateUserForm()
+
+    if form.validate_on_submit():
+        current_user.email = form.email.data
+        current_user.name = form.name.data
+        current_user.length = form.length.data
+        db.session.commit()
+        flash("cool shit")
+
+        db.session.commit()
+
+        return redirect(url_for('profile'))
+
+    elif request.method == 'GET':
+        form.name.data = current_user.name
+        form.email.data = current_user.email
+        form.length.data = current_user.length
+
+    return render_template('edit_profile.html',form=form)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

@@ -4,12 +4,24 @@
 <div class="jumbotron">
     <h1>Viktkollare!</h1>
         Lista över inrapporterad vikt och datum.
-    <ul class="list-group"> 
-    {% for weight in weights %}
-        <li class="list-group-item">Datum: {{ weight.date }} - {{ weight.kilo}} kg</li>
-        
-    {% endfor %}
-    </ul>
+
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+                <tr>                  
+                  <th>Datum</th>
+                  <th>Vikt</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for weight in weights %}
+                <tr>
+                    <td>{{ weight.date }}</td><td>{{ weight.kilo}}</td>
+                </tr>            
+            {% endfor %}
+        </tbody>
+        </table>
+    </div>
 </div>
     
 {% endblock %}    
