@@ -12,12 +12,13 @@
 	</head>
 
 	<body>
-		
+
 		<nav class='navbar navbar-expand-sm navbar-light bg-light'>
-			<button class='navbar-toggler' data-toggle='collapse' data-target='#navbarMenu'>
-				<span class='navbar-toggler-icon'></span>
-			</button> 
-			<div class="navbar-nav" id='navbarMenu'>
+			<!-- Collapse button -->
+			<button class="navbar-toggler toggler-example" type="button" data-toggle="collapse" data-target="#navbarMenu"
+			aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"><i
+				class="fas fa-bars fa-1x" ></i></span></button>
+			<div class="collapse navbar-collapse" id='navbarMenu'>
 				<a class="nav-item nav-link" href="{{url_for('index')}}">Hem</a>
 				<a class="nav-item nav-link" href="{{url_for('discord')}}">Discord</a>
 				{% if current_user.is_authenticated %}
@@ -29,7 +30,7 @@
 				<a class="nav-item nav-link" href="{{url_for('login')}}">Logga in</a>
 				<a class="nav-item nav-link" href="{{url_for('register')}}">Registrera</a>
 				{% endif %}
-	
+
 			<div>
 		</nav>
 	
